@@ -1,0 +1,46 @@
+{
+  "name": "workast-challenge",
+  "version": "1.0.0",
+  "description": "RESTful API that would allow an application to manage users and articles",
+  "main": "src/index.js",
+  "author": "Federico Cano <canofedericomartin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "http": "^0.0.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.15",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-async-to-generator": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.3.1",
+    "@types/jest": "^24.0.6",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.1.0",
+    "prettier": "^1.16.4"
+  },
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "test": "jest",
+    "test:coverage": "jest --converage"
+  }
+}
