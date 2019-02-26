@@ -30,6 +30,7 @@ class User {
           throw new PropertyRequiredException("User", "name");
         }
         if (isEmpty(this._avatar)) {
+          // TODO: This only makes senses if avatar has a default. So maybe it should throw an exception, just put the default...
           throw new PropertyRequiredException("User", "avatar");
         }
         return new User(this);
