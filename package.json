@@ -41,6 +41,6 @@
   "scripts": {
     "start": "babel-node src/index.js",
     "test": "jest",
-    "test:coverage": "jest --converage"
+    "test:coverage": "jest --coverage"
   }
 }
