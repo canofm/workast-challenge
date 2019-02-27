@@ -5,21 +5,17 @@ import { PropertyRequiredException, BuilderException } from "../../exceptions";
 describe("User", () => {
   describe("while building", () => {
     const name = "aName";
-    const avatar = "1234";
+    const avatar = "anAvatar";
 
     it("must have a name", () => {
       expect(() => new User.Builder().avatar(avatar).build()).to.throw(PropertyRequiredException);
-    });
-
-    it("must have an avatar", () => {
-      expect(() => new User.Builder().name(name).build()).to.throw(PropertyRequiredException);
     });
 
     it("must be created throw builder", () => {
       expect(() => new User()).to.throw(BuilderException);
     });
 
-    it("should be ok if it has both: name and avatar", () => {
+    it("should be ok", () => {
       const id = "c37d82c9-6b50-4707-99e7-180b661965c3"; // random uuid
       const user = new User.Builder()
         .name(name)
