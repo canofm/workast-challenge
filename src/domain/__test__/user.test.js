@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import User from "../user";
 import { PropertyRequiredException } from "../../exceptions";
 
@@ -7,11 +8,11 @@ describe("User", () => {
     const avatar = "1234";
 
     it("must have a name", () => {
-      expect(() => new User.Builder().avatar(avatar).build()).toThrow(PropertyRequiredException);
+      expect(() => new User.Builder().avatar(avatar).build()).to.throw(PropertyRequiredException);
     });
 
     it("must have an avatar", () => {
-      expect(() => new User.Builder().name(name).build()).toThrow(PropertyRequiredException);
+      expect(() => new User.Builder().name(name).build()).to.throw(PropertyRequiredException);
     });
 
     it("should be ok if it has both: name and avatar", () => {
@@ -22,9 +23,9 @@ describe("User", () => {
         .id(id)
         .build();
 
-      expect(user.name).toBe(name);
-      expect(user.avatar).toBe(avatar);
-      expect(user.id).toBe(id);
+      expect(user.name).to.be.eql(name);
+      expect(user.avatar).to.be.eql(avatar);
+      expect(user.id).to.be.eql(id);
     });
   });
 });
