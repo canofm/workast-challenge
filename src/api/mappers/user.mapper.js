@@ -1,6 +1,7 @@
 import { User } from "../../domain";
+import Mapper from "./mapper";
 
-class UserMapper {
+class UserMapper extends Mapper {
   toModel(entity) {
     return new User.Builder()
       .name(entity.name)

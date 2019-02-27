@@ -1,12 +1,12 @@
 class UserRepository {
-  constructor(userMapper, userSchema) {
-    this.userMapper = userMapper;
-    this.userSchema = userSchema;
+  constructor(mapper, schema) {
+    this.mapper = mapper;
+    this.schema = schema;
   }
 
   create(user) {
-    const userModel = this.userMapper.toModel(user);
-    return this.userSchema.create(userModel).then(this.userMapper.toDomain);
+    const userModel = this.mapper.toModel(user);
+    return this.schema.create(userModel).then(this.mapper.toDomain);
   }
 }
 
