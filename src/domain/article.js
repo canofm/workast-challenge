@@ -14,6 +14,10 @@ class Article {
     this.tags = build._tags;
     if (!isEmpty(build._id)) this.id = build._id;
   }
+  //TODO: not sure if this makes sense
+  addTags(...tags) {
+    this.tags.push(tags);
+  }
 
   static get Builder() {
     class Builder {
@@ -55,7 +59,7 @@ class Article {
           throw new PropertyRequiredException("Article", "text");
         }
 
-        if (isEmpty(this._tags)) {
+        if (isEmpty(this._tags) || this._tags.length < 1) {
           throw new PropertyRequiredException("Article", "tags");
         }
 

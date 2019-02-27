@@ -17,4 +17,4 @@ userSchema.post("update", mongoErrorHandler);
 userSchema.post("findOneAndUpdate", mongoErrorHandler);
 userSchema.post("deleteOne", mongoErrorHandler);
 
-export const UserSchema = mongoose.model("user", userSchema);
+export const UserSchema = mongoose.model("User", userSchema);

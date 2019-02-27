@@ -49,6 +49,7 @@ describe("Article", () => {
           .userId(userId)
           .title(title)
           .text(text)
+          .tags([])
           .build()
       ).to.throw(PropertyRequiredException);
     });
