@@ -10,7 +10,7 @@ const defaultSetup = {
 };
 
 class UserAPIFactory {
-  static get(overrides = {}) {
+  static getController(overrides = {}) {
     const repository = this.getRepository(overrides);
     const service = this.getService(repository);
     return new UserController(service);

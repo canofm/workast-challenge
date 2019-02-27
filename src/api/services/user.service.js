@@ -4,7 +4,7 @@ class UserService {
   }
 
   create(user) {
-    this.userRepository.create(user);
+    return this.userRepository.create(user);
   }
 }
 
