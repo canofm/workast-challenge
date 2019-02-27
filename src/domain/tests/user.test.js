@@ -11,11 +11,11 @@ describe("User", () => {
       expect(() => new User.Builder().avatar(avatar).build()).to.throw(PropertyRequiredException);
     });
 
-    it("must be created throw builder", () => {
+    it("must be created through builder", () => {
       expect(() => new User()).to.throw(BuilderException);
     });
 
-    it("should be ok", () => {
+    it("if it has every required property should be ok", () => {
       const id = "c37d82c9-6b50-4707-99e7-180b661965c3"; // random uuid
       const user = new User.Builder()
         .name(name)
