@@ -1,5 +1,5 @@
 import express from "express";
-import { ErrorHandler } from "./errorHandler";
+import { ErrorHandler } from "./error.handler";
 import { UserRouter } from "./routers/user.router";
 
 export const router = express.Router();

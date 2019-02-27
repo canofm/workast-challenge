@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import mongoErrorHandler from "./mongoErrorHandler";
+import mongoErrorHandler from "./mongo.error.handler";
 
 export const SUBJECT_SCHEMA_VALIDATION_MESSAGE_NAME = "User must have a name.";
 
