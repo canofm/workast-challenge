@@ -36,9 +36,9 @@ export class BuilderException extends Exception {
   }
 }
 
-export class EntityNotFound extends Exception {
+export class EntityNotFoundException extends Exception {
   constructor(...args) {
-    super(EntityNotFound, ...args);
+    super(EntityNotFoundException, ...args);
     const entity = args[0];
     const id = args[1];
     this.text = `${entity} with id=${id} not found`;
