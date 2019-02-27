@@ -1,7 +1,7 @@
 class UserRepository {
-  constructor(userSchema, userMapper) {
-    this.userSchema = userSchema;
+  constructor(userMapper, userSchema) {
     this.userMapper = userMapper;
+    this.userSchema = userSchema;
   }
 
   create(user) {
