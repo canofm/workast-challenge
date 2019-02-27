@@ -1,8 +1,12 @@
 import { isEmpty } from "lodash";
-import { PropertyRequiredException } from "../exceptions";
+import { PropertyRequiredException, BuilderException } from "../exceptions";
 
 class User {
   constructor(build) {
+    if (!build) {
+      throw new BuilderException("User");
+    }
+
     this.name = build._name;
     this.avatar = build._avatar;
     if (!isEmpty(build._id)) this.id = build._id;

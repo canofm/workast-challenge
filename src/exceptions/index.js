@@ -26,6 +26,16 @@ export class PropertyRequiredException extends Exception {
   }
 }
 
+export class BuilderException extends Exception {
+  constructor(...args) {
+    super(BuilderException, ...args);
+    const entity = args[0];
+    this.text = `${entity} must be created through Builder`;
+    this.type = "create_without_builder_exception";
+    this.statusCode = 500;
+  }
+}
+
 export class EntityNotFound extends Exception {
   constructor(...args) {
     super(EntityNotFound, ...args);

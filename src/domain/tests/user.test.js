@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import User from "../user";
-import { PropertyRequiredException } from "../../exceptions";
+import { PropertyRequiredException, BuilderException } from "../../exceptions";
 
 describe("User", () => {
   describe("while building", () => {
@@ -15,8 +15,12 @@ describe("User", () => {
       expect(() => new User.Builder().name(name).build()).to.throw(PropertyRequiredException);
     });
 
+    it("must be created throw builder", () => {
+      expect(() => new User()).to.throw(BuilderException);
+    });
+
     it("should be ok if it has both: name and avatar", () => {
-      const id = "asd123asd2"; //TODO: uuid
+      const id = "c37d82c9-6b50-4707-99e7-180b661965c3"; // random uuid
       const user = new User.Builder()
         .name(name)
         .avatar(avatar)
