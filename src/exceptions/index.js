@@ -26,6 +26,15 @@ export class PropertyRequiredException extends Exception {
   }
 }
 
+export class AtLeastOneTagException extends Exception {
+  constructor(...args) {
+    super(AtLeastOneTagException, ...args);
+    this.text = "You should at least one tag to filter.";
+    this.type = "at_least_one_tag_exception";
+    this.statusCode = 400;
+  }
+}
+
 export class BuilderException extends Exception {
   constructor(...args) {
     super(BuilderException, ...args);
