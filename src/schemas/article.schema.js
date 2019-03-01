@@ -7,8 +7,6 @@ export const ARTICLE_SCHEMA_VALIDATION_MESSAGES = {
   text: "Article must have a text."
 };
 
-const atLeastOneTagValidation = () => this.tags.length > 0;
-
 const articleSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,8 +15,7 @@ const articleSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: [true, ARTICLE_SCHEMA_VALIDATION_MESSAGES.title],
-    unique: true
+    required: [true, ARTICLE_SCHEMA_VALIDATION_MESSAGES.title]
   },
   text: {
     type: String,
@@ -26,8 +23,7 @@ const articleSchema = new mongoose.Schema({
   },
   tags: {
     type: [String],
-    index: true,
-    required: atLeastOneTagValidation //TODO: revisar si tiene sentido
+    index: true
   }
 });
 
