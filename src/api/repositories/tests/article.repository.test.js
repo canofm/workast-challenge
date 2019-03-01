@@ -98,13 +98,8 @@ describe("ArticleRepository", () => {
     beforeEach(
       async () =>
         await createFixture({
-          users: { q: 3, name: i => `User${i}` },
-          articles: {
-            qPerUser: i => 3, //eslint-disable-line
-            title: i => `title${i}`,
-            text: i => `text${i}`,
-            tags: i => [`tag${i}`, `tag${i + 1}`]
-          }
+          users: { q: 3 },
+          articles: { qPerUser: i => 3 } //eslint-disable-line
         })
     );
     afterEach(async () => await cleanDb());

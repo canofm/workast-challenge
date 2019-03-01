@@ -11,8 +11,9 @@ export const createFixture = ({ users, articles }) =>
 
 export const createUsers = async (q, namePattern) => {
   let users = [];
+  const nameFn = namePattern ? namePattern : i => `User${i}`;
   for (let i = 0; i < q; i++) {
-    users.push(await userRepository.create({ name: namePattern(i) }));
+    users.push(await userRepository.create({ name: nameFn(i) }));
   }
   return users;
 };
@@ -28,9 +29,9 @@ export const createArticles = (users, { qPerUser, ...options }) => {
   return Promise.map(articles, article => articleRepository.create(article));
 };
 
-const _article = (userId, n, options) => ({
-  userId,
-  title: options.title(n),
-  text: options.text(n),
-  tags: options.tags(n)
-});
+const _article = (userId, n, options) => {
+  const title = options.title ? options.title(n) : `title${n}`;
+  const text = options.text ? options.text(n) : `text${n}`;
+  const tags = options.tags ? options.tags(n) : [`tag${n}`, `tag${n + 1}`];
+  return { userId, title, text, tags };
+};
