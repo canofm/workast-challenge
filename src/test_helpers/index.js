@@ -11,7 +11,7 @@ export const removeModel = modelName => {
     if (!model) {
       return resolve();
     }
-    model.deleteOne(err => {
+    model.deleteMany({}, err => {
       if (err) {
         reject(err);
       } else {
