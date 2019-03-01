@@ -1,11 +1,10 @@
 import { expect } from "chai";
-import { cleanDb } from "../../../test_helpers";
+import mongoose from "mongoose";
 import ArticleAPIFactory from "../../factories/article.api.factory";
 import UserAPIFactory from "../../factories/user.api.factory";
 import { PropertyRequiredException, EntityNotFoundException } from "../../../exceptions";
-import mongoose from "mongoose";
-import * as Promise from "bluebird";
-import { flatMap } from "lodash";
+import { createFixture } from "../../../test_helpers/fixture";
+import { cleanDb } from "../../../test_helpers";
 
 const articleRepository = ArticleAPIFactory.getRepository();
 const userRepository = UserAPIFactory.getRepository();
@@ -96,7 +95,18 @@ describe("ArticleRepository", () => {
   });
 
   describe("on getAll", () => {
-    beforeEach(async () => await createFixture());
+    beforeEach(
+      async () =>
+        await createFixture({
+          users: { q: 3, name: i => `User${i}` },
+          articles: {
+            qPerUser: i => 3, //eslint-disable-line
+            title: i => `title${i}`,
+            text: i => `text${i}`,
+            tags: i => [`tag${i}`, `tag${i + 1}`]
+          }
+        })
+    );
     afterEach(async () => await cleanDb());
 
     it("should returns an array with all articles that contains the tags selected", async () => {
@@ -111,32 +121,4 @@ describe("ArticleRepository", () => {
       expect(results.length).to.be.eql(0);
     });
   });
-});
-
-const createFixture = () => createUsers(3).then(users => createArticles(users, 3));
-
-const createUsers = async n => {
-  let users = [];
-  for (let i = 0; i < n; i++) {
-    users.push(await userRepository.create({ name: `User${i}` }));
-  }
-  return users;
-};
-
-const createArticles = (users, n) => {
-  const articles = flatMap(users, user => {
-    let results = [];
-    for (let i = 0; i < n; i++) {
-      results.push(_article(user.id, i));
-    }
-    return results;
-  });
-  return Promise.map(articles, article => articleRepository.create(article));
-};
-
-const _article = (userId, n) => ({
-  userId,
-  title: `title${n}`,
-  text: `aText${n}`,
-  tags: [`tag${n}`, `tag${n + 1}`]
 });
