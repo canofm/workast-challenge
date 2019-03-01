@@ -90,7 +90,7 @@ describe("ArticleRepository", () => {
     it("try to remove an article that didn't exists", done => {
       articleRepository
         .remove(mongoose.Types.ObjectId())
-        .catch((EntityNotFoundException, err => done())); //eslint-disable-line
+        .catch((EntityNotFoundException, () => done()));
     });
   });
 
@@ -99,7 +99,7 @@ describe("ArticleRepository", () => {
       async () =>
         await createFixture({
           users: { q: 3 },
-          articles: { qPerUser: i => 3 } //eslint-disable-line
+          articles: { qPerUser: () => 3 }
         })
     );
     afterEach(async () => await cleanDb());
