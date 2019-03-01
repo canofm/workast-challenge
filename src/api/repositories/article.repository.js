@@ -26,12 +26,13 @@ class ArticleRepository {
       });
   }
 
-  async remove(id) {
-    const result = await this.schema.deleteOne({ _id: id });
-    if (result.deletedCount === 0) {
-      throw new EntityNotFoundException("Article", id);
-    }
-    return result;
+  remove(id) {
+    return this.schema.deleteOne({ _id: id }).then(result => {
+      if (result.deletedCount === 0) {
+        throw new EntityNotFoundException("Article", id);
+      }
+      return result;
+    });
   }
 
   //TODO: pagination
