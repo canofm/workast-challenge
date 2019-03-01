@@ -1,7 +1,5 @@
 import sinon from "sinon";
-import { expect } from "chai";
 import ArticleAPIFactory from "../../factories/article.api.factory";
-import { AtLeastOneTagException } from "../../../exceptions";
 
 describe("ArticleService", () => {
   describe("on getAll", () => {
@@ -20,19 +18,18 @@ describe("ArticleService", () => {
       articleRepository.verify();
     });
 
-    it("if tags isn't an array, should convert them to an array and then pass them to the repository", () => {
+    it("if tags is a string, should convert it into an array and then pass them to the repository", () => {
       articleRepository.expects("getAll").withExactArgs(["tag0", "tag1"]);
       articleService.getAll("tag0,tag1");
 
       articleRepository.verify();
     });
 
-    it("if tags is null or empty should raise at least one tag exception", () => {
-      const getAllWithNullTags = () => articleService.getAll();
-      const getAllWithEmptyStringTags = () => articleService.getAll("");
+    it("if tags is null, should pass it to the repository", () => {
+      articleRepository.expects("getAll").withExactArgs(undefined);
+      articleService.getAll();
 
-      expect(getAllWithNullTags).to.throw(AtLeastOneTagException);
-      expect(getAllWithEmptyStringTags).to.throw(AtLeastOneTagException);
+      articleRepository.verify();
     });
   });
 });

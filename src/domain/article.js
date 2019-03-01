@@ -1,5 +1,5 @@
 import { isEmpty } from "lodash";
-import { PropertyRequiredException, BuilderException } from "../exceptions";
+import { PropertyRequiredException, BuilderException, AtLeastOneTagException } from "../exceptions";
 
 class Article {
   constructor(build) {
@@ -13,10 +13,6 @@ class Article {
     this.text = build._text;
     this.tags = build._tags;
     if (!isEmpty(build._id)) this.id = build._id;
-  }
-  //TODO: not sure if this makes sense
-  addTags(...tags) {
-    this.tags.push(tags);
   }
 
   static get Builder() {
@@ -60,7 +56,7 @@ class Article {
         }
 
         if (isEmpty(this._tags) || this._tags.length < 1) {
-          throw new PropertyRequiredException("Article", "tags");
+          throw new AtLeastOneTagException();
         }
 
         return new Article(this);

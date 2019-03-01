@@ -1,5 +1,3 @@
-import { AtLeastOneTagException } from "../../exceptions";
-
 class ArticleService {
   constructor(ArticleRepository) {
     this.articleRepository = ArticleRepository;
@@ -18,10 +16,7 @@ class ArticleService {
   }
 
   getAll(tags) {
-    if (!tags || tags.length < 0) {
-      throw new AtLeastOneTagException();
-    }
-    const tagsToFilter = !Array.isArray(tags) ? tags.split(",") : tags;
+    const tagsToFilter = tags && !Array.isArray(tags) ? tags.split(",") : tags;
     return this.articleRepository.getAll(tagsToFilter);
   }
 }

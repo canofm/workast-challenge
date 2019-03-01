@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import { EntityNotFoundException } from "../../exceptions";
 
 class ArticleRepository {
@@ -7,7 +8,6 @@ class ArticleRepository {
   }
 
   create(article) {
-    //TODO: just in order to be consistent with other firms this should use async/await style
     const articleModel = this.mapper.toModel(article);
     return this.schema.create(articleModel).then(this.mapper.toDomain);
   }
@@ -37,8 +37,9 @@ class ArticleRepository {
 
   //TODO: pagination
   getAll(tags) {
+    const filter = isEmpty(tags) ? {} : { tags: { $in: tags } };
     return this.schema
-      .find({ tags: { $in: tags } })
+      .find(filter)
       .exec()
       .map(this.mapper.toDomain);
   }

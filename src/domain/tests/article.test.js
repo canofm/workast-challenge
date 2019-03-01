@@ -1,5 +1,9 @@
 import { expect } from "chai";
-import { PropertyRequiredException, BuilderException } from "../../exceptions";
+import {
+  PropertyRequiredException,
+  BuilderException,
+  AtLeastOneTagException
+} from "../../exceptions";
 import Article from "../article";
 
 describe("Article", () => {
@@ -51,7 +55,7 @@ describe("Article", () => {
           .text(text)
           .tags([])
           .build()
-      ).to.throw(PropertyRequiredException);
+      ).to.throw(AtLeastOneTagException);
     });
 
     it("if it has every required property should be ok", () => {

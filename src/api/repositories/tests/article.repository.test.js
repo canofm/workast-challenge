@@ -120,5 +120,11 @@ describe("ArticleRepository", () => {
       const results = await articleRepository.getAll(tags);
       expect(results.length).to.be.eql(0);
     });
+
+    it("should returns an array with all articles if tags's filter is empty", async () => {
+      const results = await articleRepository.getAll();
+
+      expect(results.length).to.be.eql(9);
+    });
   });
 });
