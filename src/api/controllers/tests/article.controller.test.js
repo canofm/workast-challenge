@@ -1,10 +1,12 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
+import mongoose from "mongoose";
 import app from "../../../server";
 import config from "../../../config";
 import { cleanDb } from "../../../test_helpers";
 import UserAPIFactory from "../../factories/user.api.factory";
-import { PropertyRequiredException } from "../../../exceptions";
+import { PropertyRequiredException, EntityNotFoundException } from "../../../exceptions";
+import { createFixture } from "../../../test_helpers/fixture";
 
 chai.use(chaiHttp);
 const request = () => chai.request(app);
@@ -50,11 +52,47 @@ describe("Article API", () => {
   });
 
   describe("on PUT", () => {
-    it("should returns 200 with the article updated", () => {});
+    let article;
 
-    it("should returns 400 if a required property is missed", () => {});
+    beforeEach(async () => {
+      await cleanDb();
+      [article] = await createFixture({ users: { q: 1 }, articles: { qPerUser: () => 1 } });
+    });
 
-    it("should returns 404 if the article didn't exists", () => {}); // Quiet sure that I can't test this due to findOneAndUpdate didn't tell about the reason of failling
+    afterEach(async () => await cleanDb());
+
+    it("should returns 200 with the article updated", async () => {
+      const res = await request()
+        .put(`${articleURI}/${article.id}`)
+        .send({ title: "newTitle" });
+
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body.title).to.be.eql("newTitle");
+    });
+
+    it("should returns 400 if a required property is missed", async () => {
+      const { body: error, res } = await request()
+        .put(`${articleURI}/${article.id}`)
+        .send({ title: "" });
+
+      expect(res).to.have.status(400);
+      expect(res).to.be.json;
+      const { message } = new PropertyRequiredException("Article", "title");
+      expect(error.text).to.be.eql(message.text);
+      expect(error.type).to.be.eql(message.type);
+    });
+
+    it("should returns 404 if the article didn't exists", async () => {
+      const articleId = mongoose.Types.ObjectId().toString();
+      const { body: error, res } = await request().put(`${articleURI}/${articleId}`);
+
+      expect(res).to.have.status(404);
+      expect(res).to.be.json;
+      const { message } = new EntityNotFoundException("Article", articleId);
+      expect(error.text).to.be.eql(message.text);
+      expect(error.type).to.be.eql(message.type);
+    });
   });
 
   describe("on DELETE", () => {
