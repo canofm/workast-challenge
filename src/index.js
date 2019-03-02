@@ -11,3 +11,9 @@ server.listen(
   config.port,
   () => console.log(`Server listing on port ${config.port}`) /* eslint-disable-line no-console */
 );
+
+process.on("SIGINT", () => {
+  server.close(() => {
+    console.log("Server down."); /* eslint-disable-line no-console */
+  });
+});
