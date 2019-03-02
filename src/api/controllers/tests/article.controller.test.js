@@ -14,7 +14,7 @@ const articleURI = `${config.api.baseUri}/articles`;
 const userRepository = UserAPIFactory.getRepository();
 
 describe("Article API", () => {
-  describe("on POST", () => {
+  describe("on POST /articles", () => {
     beforeEach(async () => await cleanDb());
     afterEach(async () => await cleanDb());
 
@@ -51,7 +51,7 @@ describe("Article API", () => {
     });
   });
 
-  describe("on PUT", () => {
+  describe("on PUT /articles/:id", () => {
     let article;
 
     beforeEach(async () => {
@@ -95,17 +95,33 @@ describe("Article API", () => {
     });
   });
 
-  describe("on DELETE", () => {
-    it("should returns 204 when article did exists", () => {});
+  describe("on DELETE /articles/:id", () => {
+    beforeEach(async () => await cleanDb());
 
-    it("should returns 404 when article didn't exists", () => {});
+    it("should returns 204 when article did exists", async () => {
+      const [article] = await createFixture({ users: { q: 1 }, articles: { qPerUser: () => 1 } });
+      const res = await request().delete(`${articleURI}/${article.id}`);
+
+      expect(res).to.have.status(204);
+    });
+
+    it("should returns 404 when article didn't exists", async () => {
+      const idThatDidntExists = mongoose.Types.ObjectId().toString();
+      const { body: error, res } = await request().delete(`${articleURI}/${idThatDidntExists}`);
+
+      expect(res).to.have.status(404);
+      expect(res).to.be.json;
+      const { message } = new EntityNotFoundException("Article", idThatDidntExists);
+      expect(error.text).to.be.eql(message.text);
+      expect(error.type).to.be.eql(message.type);
+    });
   });
 
-  describe("on GET /getall", () => {
+  describe("on GET /articles", () => {
     it("without queryparams should returns 200 with all articles", () => {});
 
-    it("with tags as queryparam separed by commas should returns 200 with all articles that own at least one of those tags", () => {});
+    it("?tagId=tag0,tag1 should returns 200 with all articles that own at least one of those tags", () => {});
 
-    it("with tags as repeating the same queryparam should returns 200 with all articles that own at least one of those tags", () => {});
+    it("?tagId=tag0&tagId=tag1 should returns 200 with all articles that own at least one of those tags", () => {});
   });
 });
