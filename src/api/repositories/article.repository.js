@@ -19,7 +19,7 @@ class ArticleRepository {
       })
       .then(updatedArticle => {
         if (!updatedArticle) {
-          //FIXME: In any case the findOneAndUpdate fails (required property missing, user id not found, or article didn't exists it returns null so we cannot know which was the cause of failing)
+          //In any case findOneAndUpdate fails it returns null, then we cannot know which is the real reason
           throw new EntityNotFoundException("Article", id);
         }
         return this.mapper.toDomain(updatedArticle);

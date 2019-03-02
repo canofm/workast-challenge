@@ -8,7 +8,8 @@ const baseConfig = {
     url: "mongodb://localhost/workast-articles"
   },
   api: {
-    baseUri: "/api/v0"
+    baseUri: "/api/v0",
+    token: "sarasa"
   }
 };
 

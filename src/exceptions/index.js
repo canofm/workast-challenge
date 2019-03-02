@@ -15,6 +15,14 @@ class Exception extends Error {
   }
 }
 
+export class AuthorizationRequiredException extends Error {
+  constructor(...args) {
+    super(...args);
+    this.statusCode = 401;
+    this.header = { "WWW-Authenticate": `Basic realm="Secure Area"` };
+  }
+}
+
 export class PropertyRequiredException extends Exception {
   constructor(...args) {
     super(PropertyRequiredException, ...args);
