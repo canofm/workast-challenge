@@ -7,7 +7,7 @@ class BasicAuth extends Auth {
     super("Basic", appConfig);
   }
 
-  _auth(resolve, reject, token) {
+  authorizate(resolve, reject, token) {
     if (token != this.appConfig.api.token) {
       reject(new AuthorizationRequiredException());
     }
