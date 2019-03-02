@@ -9,7 +9,7 @@ const baseConfig = {
   },
   api: {
     baseUri: "/api/v0",
-    token: "sarasa"
+    token: "aToken"
   }
 };
 

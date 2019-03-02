@@ -25,6 +25,7 @@ describe("Article API", () => {
 
       const { body: articleCreated, ...res } = await request()
         .post(articleURI)
+        .set("authorization", `Basic ${config.api.token}`)
         .send(article);
 
       expect(res).to.have.status(201);
@@ -42,6 +43,7 @@ describe("Article API", () => {
 
       const { body: error, res } = await request()
         .post(articleURI)
+        .set("authorization", `Basic ${config.api.token}`)
         .send(article);
 
       expect(res).to.have.status(400);
@@ -63,6 +65,7 @@ describe("Article API", () => {
     it("should returns 200 with the article updated", async () => {
       const res = await request()
         .put(`${articleURI}/${article.id}`)
+        .set("authorization", `Basic ${config.api.token}`)
         .send({ title: "newTitle" });
 
       expect(res).to.have.status(200);
@@ -73,6 +76,7 @@ describe("Article API", () => {
     it("should returns 400 if a required property is missed", async () => {
       const { body: error, res } = await request()
         .put(`${articleURI}/${article.id}`)
+        .set("authorization", `Basic ${config.api.token}`)
         .send({ title: "" });
 
       expect(res).to.have.status(400);
@@ -84,7 +88,9 @@ describe("Article API", () => {
 
     it("should returns 404 if the article didn't exists", async () => {
       const articleId = mongoose.Types.ObjectId().toString();
-      const { body: error, res } = await request().put(`${articleURI}/${articleId}`);
+      const { body: error, res } = await request()
+        .put(`${articleURI}/${articleId}`)
+        .set("authorization", `Basic ${config.api.token}`);
 
       expect(res).to.have.status(404);
       expect(res).to.be.json;
@@ -99,14 +105,18 @@ describe("Article API", () => {
 
     it("should returns 204 when article did exists", async () => {
       const [article] = await createFixture({ users: { q: 1 }, articles: { qPerUser: () => 1 } });
-      const res = await request().delete(`${articleURI}/${article.id}`);
+      const res = await request()
+        .delete(`${articleURI}/${article.id}`)
+        .set("authorization", `Basic ${config.api.token}`);
 
       expect(res).to.have.status(204);
     });
 
     it("should returns 404 when article didn't exists", async () => {
       const idThatDidntExists = mongoose.Types.ObjectId().toString();
-      const { body: error, res } = await request().delete(`${articleURI}/${idThatDidntExists}`);
+      const { body: error, res } = await request()
+        .delete(`${articleURI}/${idThatDidntExists}`)
+        .set("authorization", `Basic ${config.api.token}`);
 
       expect(res).to.have.status(404);
       expect(res).to.be.json;
@@ -123,7 +133,9 @@ describe("Article API", () => {
     });
 
     it("without queryparams should returns 200 with all articles", async () => {
-      const { body, res } = await request().get(articleURI);
+      const { body, res } = await request()
+        .get(articleURI)
+        .set("authorization", `Basic ${config.api.token}`);
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;
@@ -133,6 +145,7 @@ describe("Article API", () => {
     it("?tagId=tag0,tag1 should returns 200 with all articles that own at least one of those tags", async () => {
       const { body, res } = await request()
         .get(articleURI)
+        .set("authorization", `Basic ${config.api.token}`)
         .query({ tagId: "tag0,tag1" });
 
       expect(res).to.have.status(200);
@@ -143,6 +156,7 @@ describe("Article API", () => {
     it("?tagId=tag0&tagId=tag1 should returns 200 with all articles that own at least one of those tags", async () => {
       const { body, res } = await request()
         .get(articleURI)
+        .set("authorization", `Basic ${config.api.token}`)
         .query("tagId=tag0&tagId=tag1");
 
       expect(res).to.have.status(200);

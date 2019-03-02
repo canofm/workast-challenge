@@ -1,6 +1,9 @@
 import BasicAuth from "./basic.auth";
 
-export const auth = config => (req, res, next) => {
+export const authMiddleware = config => async (req, res, next) => {
   const authStrategy = new BasicAuth(config);
-  next(authStrategy.auth(req.headers["authorization"]));
+  authStrategy
+    .auth(req.headers["authorization"])
+    .then(() => next())
+    .catch(err => next(err));
 };

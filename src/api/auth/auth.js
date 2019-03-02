@@ -12,7 +12,6 @@ class Auth {
   }
 
   auth(credentials) {
-    console.log({ credentials });
     return new Promise((resolve, reject) => {
       if (!credentials) {
         reject(new AuthorizationRequiredException());
