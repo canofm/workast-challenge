@@ -14,9 +14,10 @@ const articleURI = `${config.api.baseUri}/articles`;
 const userRepository = UserAPIFactory.getRepository();
 
 describe("Article API", () => {
+  afterEach(async () => await cleanDb());
+
   describe("on POST /articles", () => {
     beforeEach(async () => await cleanDb());
-    afterEach(async () => await cleanDb());
 
     it("should returns 201 with the article just created", async () => {
       const { id: userId } = await userRepository.create({ name: "aName" });
@@ -58,8 +59,6 @@ describe("Article API", () => {
       await cleanDb();
       [article] = await createFixture({ users: { q: 1 }, articles: { qPerUser: () => 1 } });
     });
-
-    afterEach(async () => await cleanDb());
 
     it("should returns 200 with the article updated", async () => {
       const res = await request()
@@ -118,10 +117,37 @@ describe("Article API", () => {
   });
 
   describe("on GET /articles", () => {
-    it("without queryparams should returns 200 with all articles", () => {});
+    beforeEach(async () => {
+      await cleanDb();
+      await createFixture({ users: { q: 3 }, articles: { qPerUser: () => 3 } });
+    });
 
-    it("?tagId=tag0,tag1 should returns 200 with all articles that own at least one of those tags", () => {});
+    it("without queryparams should returns 200 with all articles", async () => {
+      const { body, res } = await request().get(articleURI);
 
-    it("?tagId=tag0&tagId=tag1 should returns 200 with all articles that own at least one of those tags", () => {});
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(body.length).to.be.eql(9);
+    });
+
+    it("?tagId=tag0,tag1 should returns 200 with all articles that own at least one of those tags", async () => {
+      const { body, res } = await request()
+        .get(articleURI)
+        .query({ tagId: "tag0,tag1" });
+
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(body.length).to.be.eql(6);
+    });
+
+    it("?tagId=tag0&tagId=tag1 should returns 200 with all articles that own at least one of those tags", async () => {
+      const { body, res } = await request()
+        .get(articleURI)
+        .query("tagId=tag0&tagId=tag1");
+
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(body.length).to.be.eql(6);
+    });
   });
 });
