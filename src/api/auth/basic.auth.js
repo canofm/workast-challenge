@@ -1,23 +1,17 @@
 import config from "../../config";
 import { AuthorizationRequiredException } from "../../exceptions";
-import Promise from "bluebird"; //I'm just using the Promise from bluebird for the typified catch
+import Auth from "./auth";
 
-class BasicAuth {
+class BasicAuth extends Auth {
   constructor(appConfig = config) {
-    this.appConfig = appConfig;
+    super("Basic", appConfig);
   }
 
-  auth(authorization) {
-    return new Promise((resolve, reject) => {
-      if (!authorization) {
-        reject(new AuthorizationRequiredException());
-      }
-      const [method, token] = authorization.split(" ");
-      if (method === "Basic" && token != this.appConfig.api.token) {
-        reject(new AuthorizationRequiredException());
-      }
-      resolve();
-    });
+  _auth(resolve, reject, token) {
+    if (token != this.appConfig.api.token) {
+      reject(new AuthorizationRequiredException());
+    }
+    resolve();
   }
 }
 
