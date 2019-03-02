@@ -1,5 +1,5 @@
 export default {
   db: {
-    url: "mongodb://localhost/workast-articles-dev"
+    url: process.env.CONNECTION_STRING || "mongodb://localhost/workast-articles-dev"
   }
 };

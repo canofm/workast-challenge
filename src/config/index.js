@@ -1,15 +1,16 @@
 import { merge } from "lodash";
+require("dotenv").config();
 
 const env = process.env.NODE_ENV || "development";
 
 const baseConfig = {
   port: process.env.PORT || 3000,
   db: {
-    url: "mongodb://localhost/workast-articles"
+    url: process.env.CONNECTION_STRING || "mongodb://localhost/workast-articles"
   },
   api: {
-    baseUri: "/api/v0",
-    token: "aToken"
+    baseUri: process.env.API_SUFFIX || "/api/v0",
+    token: process.env.SECRET_TOKEN || "aToken"
   }
 };
 
