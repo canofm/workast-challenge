@@ -1,5 +1,5 @@
 import ArticleMapper from "../mappers/article.mapper";
-import { ArticleSchema } from "../../schemas/article.schema";
+import { ArticleSchema } from "../../../schemas/article.schema";
 import ArticleRepository from "../repositories/article.repository";
 import ArticleService from "../services/article.service";
 import ArticleController from "../controllers/article.controller";

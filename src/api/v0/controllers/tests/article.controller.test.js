@@ -1,12 +1,12 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import mongoose from "mongoose";
-import app from "../../../server";
-import config from "../../../config";
-import { cleanDb } from "../../../test_helpers";
+import app from "../../../../server";
+import config from "../../../../config";
+import { cleanDb } from "../../../../test_helpers";
 import UserAPIFactory from "../../factories/user.api.factory";
-import { PropertyRequiredException, EntityNotFoundException } from "../../../exceptions";
-import { createFixture } from "../../../test_helpers/fixture";
+import { PropertyRequiredException, EntityNotFoundException } from "../../../../exceptions";
+import { createFixture } from "../../../../test_helpers/fixture";
 
 chai.use(chaiHttp);
 const request = () => chai.request(app);

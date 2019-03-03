@@ -1,7 +1,7 @@
 import { flatMap } from "lodash";
 import * as Promise from "bluebird";
-import UserAPIFactory from "../api/factories/user.api.factory";
-import ArticleAPIFactory from "../api/factories/article.api.factory";
+import UserAPIFactory from "../api/v0/factories/user.api.factory";
+import ArticleAPIFactory from "../api/v0/factories/article.api.factory";
 
 const userRepository = UserAPIFactory.getRepository();
 const articleRepository = ArticleAPIFactory.getRepository();

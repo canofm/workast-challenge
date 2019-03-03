@@ -1,10 +1,10 @@
 import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
-import { cleanDb } from "../../../test_helpers";
-import app from "../../../server";
-import config from "../../../config";
-import { User } from "../../../domain";
-import { PropertyRequiredException } from "../../../exceptions";
+import { cleanDb } from "../../../../test_helpers";
+import app from "../../../../server";
+import config from "../../../../config";
+import { User } from "../../../../domain";
+import { PropertyRequiredException } from "../../../../exceptions";
 
 chai.use(chaiHttp);
 const request = () => chai.request(app);

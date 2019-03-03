@@ -1,5 +1,5 @@
 import Promise from "bluebird"; //I'm just using the Promise from bluebird for the typified catch
-import { AuthorizationRequiredException } from "../../exceptions";
+import { AuthorizationRequiredException } from "../../../exceptions";
 
 /**
  * The idea behind this design is to have several polymorphic auth strategies in a chain of responsibility pattern.

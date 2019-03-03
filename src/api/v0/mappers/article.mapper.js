@@ -1,4 +1,4 @@
-import { Article } from "../../domain";
+import { Article } from "../../../domain";
 import Mapper from "./mapper";
 
 class ArticleMapper extends Mapper {

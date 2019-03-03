@@ -1,5 +1,5 @@
-import config from "../../config";
-import { AuthorizationRequiredException } from "../../exceptions";
+import config from "../../../config";
+import { AuthorizationRequiredException } from "../../../exceptions";
 import Auth from "./auth";
 
 class ApiKeyAuth extends Auth {

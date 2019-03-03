@@ -2,9 +2,9 @@ import { expect } from "chai";
 import mongoose from "mongoose";
 import ArticleAPIFactory from "../../factories/article.api.factory";
 import UserAPIFactory from "../../factories/user.api.factory";
-import { PropertyRequiredException, EntityNotFoundException } from "../../../exceptions";
-import { createFixture } from "../../../test_helpers/fixture";
-import { cleanDb } from "../../../test_helpers";
+import { PropertyRequiredException, EntityNotFoundException } from "../../../../exceptions";
+import { createFixture } from "../../../../test_helpers/fixture";
+import { cleanDb } from "../../../../test_helpers";
 
 const articleRepository = ArticleAPIFactory.getRepository();
 const userRepository = UserAPIFactory.getRepository();

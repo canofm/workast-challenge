@@ -1,5 +1,5 @@
 import { isEmpty } from "lodash";
-import { EntityNotFoundException } from "../../exceptions";
+import { EntityNotFoundException } from "../../../exceptions";
 
 class ArticleRepository {
   constructor(mapper, schema) {

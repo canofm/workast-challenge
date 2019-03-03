@@ -1,8 +1,8 @@
 import { expect } from "chai";
-import { cleanDb } from "../../../test_helpers";
-import { User } from "../../../domain";
+import { cleanDb } from "../../../../test_helpers";
+import { User } from "../../../../domain";
 import UserAPIFactory from "../../factories/user.api.factory";
-import { PropertyRequiredException } from "../../../exceptions";
+import { PropertyRequiredException } from "../../../../exceptions";
 
 describe("UserRepository", () => {
   const userRepository = UserAPIFactory.getRepository();

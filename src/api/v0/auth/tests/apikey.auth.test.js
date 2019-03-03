@@ -1,5 +1,5 @@
 import ApiKeyAuth from "../apikey.auth";
-import { AuthorizationRequiredException } from "../../../exceptions";
+import { AuthorizationRequiredException } from "../../../../exceptions";
 
 describe("ApiKey Auth", () => {
   const apiKeyAuth = new ApiKeyAuth({ api: { token: "token" } });

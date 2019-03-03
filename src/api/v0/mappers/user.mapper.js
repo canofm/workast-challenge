@@ -1,4 +1,4 @@
-import { User } from "../../domain";
+import { User } from "../../../domain";
 import Mapper from "./mapper";
 
 class UserMapper extends Mapper {
