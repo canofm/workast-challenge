@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Documentation of the RESTful API that would allow an application to manage users and articles.",
+    "description": "Documentation of the RESTful API that would allow an application to manage users and articles. \n\n# Authentication\n\n This application doesn't follow standard protocols such as Basic Auth or OAuth. \n In order to make authenticated request, you need to add to your request a header: \n <code>{ Authorization: APIKey <token> }</code> \n <em>token</em>: is configurated by the env's server file.",
     "version": "1.0.0",
     "title": "Workast Challenge",
     "contact": {
@@ -13,6 +13,8 @@
       "url": "https://github.com/canofm/workast-challenge/LICENSE"
     }
   },
+  "host": "localhost:3000",
+  "basePath": "/api/v0",
   "tags": [
     {
       "name": "user",
@@ -230,7 +232,7 @@
   "securityDefinitions": {
     "api_key": {
       "type": "apiKey",
-      "name": "api_key",
+      "name": "Authorization",
       "in": "header"
     }
   },

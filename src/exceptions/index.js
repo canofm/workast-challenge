@@ -20,6 +20,10 @@ export class AuthorizationRequiredException extends Error {
     super(...args);
     this.statusCode = 401;
     this.header = { "WWW-Authenticate": `Basic realm="Secure Area"` };
+    this.message = {
+      text: "You need to be authenticate to do this operation",
+      type: "authorization_required_exception"
+    };
   }
 }
 
