@@ -30,7 +30,7 @@ class Auth {
   }
 
   _authChain(resolve, reject, method, token) {
-    if (method === this.method) {
+    if (method.toLowerCase() === this.method.toLowerCase()) {
       this.authorizate(resolve, reject, token);
     } else {
       if (this.successor) {

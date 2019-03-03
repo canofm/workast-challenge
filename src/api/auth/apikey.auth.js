@@ -2,9 +2,9 @@ import config from "../../config";
 import { AuthorizationRequiredException } from "../../exceptions";
 import Auth from "./auth";
 
-class BasicAuth extends Auth {
+class ApiKeyAuth extends Auth {
   constructor(appConfig = config) {
-    super("Basic", appConfig);
+    super("apikey", appConfig);
   }
 
   authorizate(resolve, reject, token) {
@@ -15,4 +15,4 @@ class BasicAuth extends Auth {
   }
 }
 
-export default BasicAuth;
+export default ApiKeyAuth;

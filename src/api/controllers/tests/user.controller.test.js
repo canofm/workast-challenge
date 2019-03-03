@@ -19,7 +19,7 @@ describe("User API", () => {
       const user = new User.Builder().name("aName").build();
       const res = await request()
         .post(userURI)
-        .set("authorization", `Basic ${config.api.token}`)
+        .set("authorization", `APIKey ${config.api.token}`)
         .send(user);
 
       expect(res).to.have.status(201);
@@ -33,7 +33,7 @@ describe("User API", () => {
     it("when body sent is incomplete, it shoulds return 400", async () => {
       const res = await request()
         .post(userURI)
-        .set("authorization", `Basic ${config.api.token}`)
+        .set("authorization", `APIKey ${config.api.token}`)
         .send({ avatar: "http://anUrl.com/images/anAvatar" });
 
       expect(res).to.have.status(400);

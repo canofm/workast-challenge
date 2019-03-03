@@ -1,7 +1,7 @@
-import BasicAuth from "./basic.auth";
+import ApiKeyAuth from "./apikey.auth";
 
 export const authMiddleware = config => async (req, res, next) => {
-  const authStrategy = new BasicAuth(config);
+  const authStrategy = new ApiKeyAuth(config);
   authStrategy
     .auth(req.headers["authorization"])
     .then(() => next())
