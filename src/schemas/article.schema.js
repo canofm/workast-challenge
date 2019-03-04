@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate";
+import mongooseTimestamp from "mongoose-timestamp";
 import mongoErrorHandler from "./mongo.error.handler";
 
 export const ARTICLE_SCHEMA_VALIDATION_MESSAGES = {
@@ -34,5 +35,6 @@ articleSchema.post("findOneAndUpdate", mongoErrorHandler);
 articleSchema.post("deleteOne", mongoErrorHandler);
 
 articleSchema.plugin(mongoosePaginate);
+articleSchema.plugin(mongooseTimestamp);
 
 export const ArticleSchema = mongoose.model("article", articleSchema);

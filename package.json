@@ -16,6 +16,7 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.4.15",
     "mongoose-paginate": "^5.0.3",
+    "mongoose-timestamp": "^0.6.0",
     "swagger-ui-express": "^4.0.2",
     "winston": "^3.2.1"
   },
