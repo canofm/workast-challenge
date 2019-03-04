@@ -7,6 +7,7 @@ import { cleanDb } from "../../../../test_helpers";
 import UserAPIFactory from "../../factories/user.api.factory";
 import { PropertyRequiredException, EntityNotFoundException } from "../../../../exceptions";
 import { createFixture } from "../../../../test_helpers/fixture";
+import { console } from "../../../../logger";
 
 chai.use(chaiHttp);
 const request = () => chai.request(app);
@@ -14,7 +15,11 @@ const articleURI = `${config.api.baseUri}/articles`;
 const userRepository = UserAPIFactory.getRepository();
 
 describe("Article API", () => {
-  afterEach(async () => await cleanDb());
+  beforeEach(() => (console.silent = true));
+  afterEach(async () => {
+    console.silent = false;
+    await cleanDb();
+  });
 
   describe("on POST /articles", () => {
     beforeEach(async () => await cleanDb());

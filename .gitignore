@@ -4,3 +4,5 @@
 yarn-error.log
 /coverage
 /.nyc_output
+error.log
+combined.log

@@ -4,6 +4,7 @@ import cors from "cors";
 import { connect } from "./db";
 import { router } from "./api";
 import config from "./config";
+import logger from "./logger";
 
 const app = express();
 app.use(cors());
@@ -19,5 +20,5 @@ export default app;
 
 // last chance to log
 process.on("uncaughtException", err => {
-  console.error(err.stack);
+  logger.error(err.stack);
 });

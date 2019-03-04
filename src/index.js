@@ -3,17 +3,14 @@ require("@babel/polyfill");
 import http from "http";
 import app from "./server";
 import config from "./config";
+import logger from "./logger";
 
 const server = http.createServer(app);
 
-// TODO: this should log only in prod/dev, but not in testing
-server.listen(
-  config.port,
-  () => console.log(`Server listing on port ${config.port}`) /* eslint-disable-line no-console */
-);
+server.listen(config.port, () => logger.info(`Server listing on port ${config.port}`));
 
 process.on("SIGINT", () => {
   server.close(() => {
-    console.log("Server down."); /* eslint-disable-line no-console */
+    logger.info("Server down.");
   });
 });

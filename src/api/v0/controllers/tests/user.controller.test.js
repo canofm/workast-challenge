@@ -5,6 +5,7 @@ import app from "../../../../server";
 import config from "../../../../config";
 import { User } from "../../../../domain";
 import { PropertyRequiredException } from "../../../../exceptions";
+import { console } from "../../../../logger";
 
 chai.use(chaiHttp);
 const request = () => chai.request(app);
@@ -31,6 +32,7 @@ describe("User API", () => {
     });
 
     it("when body sent is incomplete, it shoulds return 400", async () => {
+      console.silent = true;
       const res = await request()
         .post(userURI)
         .set("authorization", `APIKey ${config.api.token}`)
@@ -40,6 +42,7 @@ describe("User API", () => {
       const error = JSON.parse(res.error.text);
       const errorExpected = new PropertyRequiredException("User", "name").message;
       expect(error.type).to.be.eql(errorExpected.type);
+      console.silent = false;
     });
   });
 });
