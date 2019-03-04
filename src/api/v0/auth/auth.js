@@ -4,7 +4,7 @@ import { AuthorizationRequiredException } from "../../../exceptions";
 /**
  * The idea behind this design is to have several polymorphic auth strategies in a chain of responsibility pattern.
  * Due to some strategies such as Bearer are asynchronous then strategies must be asynchronic.
- * Maybe this design is overkill to the challenge required,
+ * Maybe this design is an overkill to the challenge required,
  * but I think that this a cost I could afford in order to gain extensibility and flexibility,
  * also testbility and readibility in the perspective of the own auth strategy.
  */

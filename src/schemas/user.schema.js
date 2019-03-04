@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     required: [true, SUBJECT_SCHEMA_VALIDATION_MESSAGE_NAME],
     unique: true
   },
-  avatar: String // TODO: Add default avatar
+  avatar: String
 });
 
 userSchema.post("save", mongoErrorHandler);

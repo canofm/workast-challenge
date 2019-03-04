@@ -36,7 +36,6 @@ class ArticleRepository {
     });
   }
 
-  //TODO: pagination
   getAll(tags, options = {}) {
     const defaultPagination = { offset: 0, limit: config.defaults.pagination.limit };
     const paginate = Object.assign({}, defaultPagination, options);
