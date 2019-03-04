@@ -63,7 +63,7 @@
       "get": {
         "tags": ["article"],
         "summary": "Find articles by tags",
-        "description": "Muliple tags can be provided with comma separated strings. Also it accepts using the same query param multiple times.",
+        "description": "Muliple tags can be provided with comma separated strings.\n Also it accepts using the same query param multiple times. \n The response is an object like: \n <code>{ \ndocs: [Article, Article,...], \ntotal: 123, \noffset: 0, \nlimit: 100\n }</code>",
         "operationId": "findArticlesByTags",
         "produces": ["application/json"],
         "parameters": [
@@ -71,12 +71,26 @@
             "name": "tagId",
             "in": "query",
             "description": "Tags to filter by",
-            "required": true,
+            "required": false,
             "type": "array",
             "items": {
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Number of articles to skip (from bottom) of results",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Number of articles to show in results",
+            "type": "string"
           }
         ],
         "responses": {
@@ -258,8 +272,7 @@
       "properties": {
         "userId": {
           "type": "string",
-          "format": "ObjectId",
-          "$ref": "#/definitions/User"
+          "format": "ObjectId"
         },
         "title": {
           "type": "string"
