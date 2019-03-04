@@ -26,7 +26,7 @@ export default class ArticleController {
 
   getAll(req, res, next) {
     return this.articleService
-      .getAll(req.query.tagId)
+      .getAll(req.query.tagId, { offset: req.params.offset, limit: req.params.limit })
       .then(results => res.status(200).json(results))
       .catch(err => next(err));
   }

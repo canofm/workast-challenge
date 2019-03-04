@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate";
 import mongoErrorHandler from "./mongo.error.handler";
 
 export const ARTICLE_SCHEMA_VALIDATION_MESSAGES = {
@@ -31,5 +32,7 @@ articleSchema.post("save", mongoErrorHandler);
 articleSchema.post("update", mongoErrorHandler);
 articleSchema.post("findOneAndUpdate", mongoErrorHandler);
 articleSchema.post("deleteOne", mongoErrorHandler);
+
+articleSchema.plugin(mongoosePaginate);
 
 export const ArticleSchema = mongoose.model("article", articleSchema);

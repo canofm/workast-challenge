@@ -1,5 +1,6 @@
 import { isEmpty } from "lodash";
 import { EntityNotFoundException } from "../../../exceptions";
+import config from "../../../config";
 
 class ArticleRepository {
   constructor(mapper, schema) {
@@ -36,12 +37,13 @@ class ArticleRepository {
   }
 
   //TODO: pagination
-  getAll(tags) {
+  getAll(tags, options = {}) {
+    const defaultPagination = { offset: 0, limit: config.defaults.pagination.limit };
+    const paginate = Object.assign({}, defaultPagination, options);
     const filter = isEmpty(tags) ? {} : { tags: { $in: tags } };
     return this.schema
-      .find(filter)
-      .exec()
-      .map(this.mapper.toDomain);
+      .paginate(filter, paginate)
+      .tap(results => (results.docs = results.docs.map(this.mapper.toDomain)));
   }
 }
 

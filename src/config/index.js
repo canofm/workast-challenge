@@ -11,6 +11,11 @@ const baseConfig = {
   api: {
     baseUri: process.env.API_SUFFIX || "/api/v0",
     token: process.env.SECRET_TOKEN || "aToken"
+  },
+  defaults: {
+    pagination: {
+      limit: process.env.DEFAULT_PAGINATION_LIMIT || 50
+    }
   }
 };
 

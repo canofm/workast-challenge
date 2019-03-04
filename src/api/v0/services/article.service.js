@@ -15,9 +15,9 @@ class ArticleService {
     return this.articleRepository.remove(id);
   }
 
-  getAll(tags) {
+  getAll(tags, paginationOptions) {
     const tagsToFilter = tags && !Array.isArray(tags) ? tags.split(",") : tags;
-    return this.articleRepository.getAll(tagsToFilter);
+    return this.articleRepository.getAll(tagsToFilter, paginationOptions);
   }
 }
 

@@ -107,19 +107,18 @@ describe("ArticleRepository", () => {
     it("should returns an array with all articles that contains the tags selected", async () => {
       const tags = ["tag0", "tag1"];
       const results = await articleRepository.getAll(tags);
-      expect(results.length).to.be.eql(6);
+      expect(results.total).to.be.eql(6);
     });
 
     it("should returns an empty array if the tags passed don't match with any the articles", async () => {
       const tags = ["tag10", "tag12"];
       const results = await articleRepository.getAll(tags);
-      expect(results.length).to.be.eql(0);
+      expect(results.total).to.be.eql(0);
     });
 
     it("should returns an array with all articles if tags's filter is empty", async () => {
       const results = await articleRepository.getAll();
-
-      expect(results.length).to.be.eql(9);
+      expect(results.total).to.be.eql(9);
     });
   });
 });

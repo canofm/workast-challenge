@@ -139,7 +139,7 @@ describe("Article API", () => {
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;
-      expect(body.length).to.be.eql(9);
+      expect(body.total).to.be.eql(9);
     });
 
     it("?tagId=tag0,tag1 should returns 200 with all articles that own at least one of those tags", async () => {
@@ -150,7 +150,7 @@ describe("Article API", () => {
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;
-      expect(body.length).to.be.eql(6);
+      expect(body.total).to.be.eql(6);
     });
 
     it("?tagId=tag0&tagId=tag1 should returns 200 with all articles that own at least one of those tags", async () => {
@@ -161,7 +161,7 @@ describe("Article API", () => {
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;
-      expect(body.length).to.be.eql(6);
+      expect(body.total).to.be.eql(6);
     });
   });
 });
